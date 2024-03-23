@@ -7,6 +7,7 @@ from dfs import DFS
 from greedy import Greedy
 
 def main():
+    # Lee las configuraciones del archivo config_file
     config_params = read_config('config_file.config')
     
     # Crea el juego Sokoban con los parámetros leídos
@@ -17,7 +18,7 @@ def main():
      # Ejecuta algoritmo A
     if config_params['Algorithm']['a'] == 'True':
         solution_A = A.search(game)
-        print("A Solution:", solution_A)
+        print("A* Solution:", solution_A)
         
      # Ejecuta algoritmo BFS
     if config_params['Algorithm']['bfs'] == 'True':

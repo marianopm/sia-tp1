@@ -1,8 +1,18 @@
 ## Sistemas de Inteligencia Artificial
-### TP1: Introducción al Análisis de Datos
+### TP1: Métodos de Búsqueda
 ### Primer Cuatrimestre 2024
 
-## Grupo 8
+### Introducción
+
+### Requisitos
+
+### Instalacíon
+
+### Ejecución
+python3 main.py
+
+
+### Grupo 8
 ## Integrantes
 + Baquero Suárez Mauro
 + Biolley Calvo, Lucas Miguel
