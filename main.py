@@ -13,7 +13,8 @@ def main():
     # Crea el juego Sokoban con los parámetros leídos
     initial_state = eval(config_params['Sokoban']['initial_state'])
     goal_state = eval(config_params['Sokoban']['goal_state'])
-    game = SokobanGame(initial_state, goal_state)
+    board = eval(config_params['Board']['board'])
+    game = SokobanGame(initial_state, goal_state, board)
     
      # Ejecuta algoritmo A
     if config_params['Algorithm']['a'] == 'True':
