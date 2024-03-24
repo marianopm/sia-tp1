@@ -1,23 +1,109 @@
+from collections import deque
+from boards import board_1
+
+MovimientosPosibles = ['UP', 'DOWN', 'LEFT', 'RIGHT']
+
 class SokobanGame:
-        def __init__(self, initial_state, goal_state, board):
-            self.initial_state = initial_state
-            self.goal_state = goal_state
+        def __init__(self, initial_node, goal_node, board):
+            self.initial_node = initial_node
+            self.goal_node = goal_node
             self.board = board
             
-        def is_goal_state(self, state):
-            return state == self.goal_state
+        def is_goal_node(self, node):
+            return node == self.goal_node
 
-        def get_initial_state(self):
-            return self.initial_state
+        def get_initial_node(self):
+            return self.initial_node
 
         def get_neighbors(self, state):
             # logica para obtener vecins
             pass
         
-        def trace_back(node, solution_path):
-            while node.parent is not None:
-                solution_path.append(node.state)  # Agrega el estado del nodo al camino
-                node = node.parent  # Se mueve al nodo padre
+def reconstruct_path(parent, state):
+    # Reconstruct the path from the initial state to the given state
+    path = []
+    while state is not None:
+        path.append(state)
+        state = parent[str(state)]
+    # Reverse the path to get the correct order
+    path.reverse()
+    return path
 
-            solution_path.append(node.state)  # Agrega el estado del nodo inicial al camino
-            return solution_path
+# Define el estado final
+def es_estado_final(tablero):
+    for fila in range(len(tablero)):
+        for columna in range(len(tablero[fila])):
+            if tablero[fila][columna] == 'C':
+                # Si una caja no está sobre un objetivo, el estado no es final
+                if board_1[fila][columna] != 'O':
+                    return False
+    return True
+
+# Funcion para obtener la posicion actual del jugador
+def getPosActualJugador(tablero):
+    for fila in range(len(tablero)):
+        for columna in range(len(tablero[fila])):
+            if tablero[fila][columna] == 'J':
+                return (fila, columna)
+                
+def moverJugador(tablero, nuevoTablero, posJugadorFutura, posActualJugador, action):     
+    if posJugadorFutura is not None and nuevoTablero[posJugadorFutura[0]][posJugadorFutura[1]] != '#':
+        # Movemos el jugador a la nueva posicion si no hay nada
+        if nuevoTablero[posJugadorFutura[0]][posJugadorFutura[1]] == ' ':
+            nuevoTablero[posJugadorFutura[0]][posJugadorFutura[1]] = 'J'
+            nuevoTablero[posActualJugador[0]][posActualJugador[1]] = ' '
+            
+        # Si la posicion futura es un objetivo, guardamos la posicion del objetivo y movemos jugador
+#        elif nuevoTablero[posJugadorFutura[0]][posJugadorFutura[1]] == 'O':
+#            nuevoTablero[posJugadorFutura[0]][posJugadorFutura[1]] = 'J'
+#            nuevoTablero[posActualJugador[0]][posActualJugador[1]] = ' '
+            
+        # Si hay una caja en la posicion futura
+        elif nuevoTablero[posJugadorFutura[0]][posJugadorFutura[1]] == 'C':
+            posCajaFutura = None 
+            if action == 'UP':
+                posCajaFutura = (posJugadorFutura[0] -1 , posJugadorFutura[1])
+            elif action == 'DOWN':
+                posCajaFutura = (posJugadorFutura[0] + 1 , posJugadorFutura[1])
+            elif action == 'LEFT':
+                posCajaFutura = (posJugadorFutura[0], posJugadorFutura[1] - 1)
+            elif action == 'RIGHT':
+                posCajaFutura = (posJugadorFutura[0], posJugadorFutura[1] + 1)
+            #Verificamos si se puede empujar
+            if tablero[posCajaFutura[0]][posCajaFutura[1]] != 'C' and tablero[posCajaFutura[0]][posCajaFutura[1]] != '#':
+                nuevoTablero[posCajaFutura[0]][posCajaFutura[1]] = 'C'
+                nuevoTablero[posJugadorFutura[0]][posJugadorFutura[1]] = 'J'
+                nuevoTablero[posActualJugador[0]][posActualJugador[1]] = ' '
+    return nuevoTablero
+    
+# define action function
+def mainMovimiento(tablero, action):
+    nuevoTablero = [row[:] for row in tablero]
+
+    # Obtenemos la posicion del jugador
+    posActualJugador = getPosActualJugador(tablero)
+
+    # en funcion del movimiento elegido se mueve el jugador
+    posJugadorFutura = None
+    if action == 'UP':
+        posJugadorFutura = (posActualJugador[0] - 1, posActualJugador[1])
+    elif action == 'DOWN':
+        posJugadorFutura = (posActualJugador[0] + 1, posActualJugador[1])
+    elif action == 'LEFT':
+        posJugadorFutura = (posActualJugador[0], posActualJugador[1] - 1)
+    elif action == 'RIGHT':
+        posJugadorFutura = (posActualJugador[0], posActualJugador[1] + 1)
+
+    # devuelve el tablero
+    if posJugadorFutura is not None and nuevoTablero[posJugadorFutura[0]][posJugadorFutura[1]] != '#':
+        nuevoTablero = moverJugador(tablero, nuevoTablero, posJugadorFutura, posActualJugador, action)
+
+    return nuevoTablero
+
+def generate_next_states(state):
+    next_states = []
+    for action in MovimientosPosibles:
+        nuevoTablero = mainMovimiento(state, action)
+        if nuevoTablero not in next_states:
+            next_states.append(nuevoTablero)
+    return next_states

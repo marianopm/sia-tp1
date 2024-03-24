@@ -1,7 +1,7 @@
 import time
 
 class A:
-    def search(game):
+    def search(game, heuristic):
         # Inicia el cronometro
         start = time.time()
         
@@ -20,7 +20,7 @@ class A:
         print("A*: Numero de nodos expandidos:", nodes_expanded) 
         print("A*: Numero de nodos frontera:", frontier_nodes) 
         
-        pass
+        return None, None, None, None
     
     
     

@@ -1,7 +1,7 @@
 import time
 
 class Greedy:
-    def search(game):
+    def search(game, heuristic):
         # Inicia el cronometro
         start = time.time()
         
@@ -19,4 +19,4 @@ class Greedy:
         print("Greedy: Numero de nodos expandidos:", nodes_expanded) 
         print("Greedy: Numero de nodos frontera:", frontier_nodes) 
         
-        pass
+        return None, None, None, None
