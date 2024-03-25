@@ -4,19 +4,7 @@ from .sokobanGame import es_estado_final, generate_next_states, reconstruct_path
 
 class DFS:
     def search(game):
-        # Inicia el cronometro
-        start = time.time()
-        
         # Implementa el algoritmo DFS
-        total_steps = 0
-        nodes_expanded = 0
-        frontier_nodes = 0
-        
-        visited = set()
-
-        initial_node = game.initial_node
-        goal_node = game.goal_node
-        queue = deque([initial_node])
         
         # Inicializa la pila con el estado inicial
         stack = [game.board]
@@ -52,16 +40,6 @@ class DFS:
                     frontier_nodes += 1
                     # Registra el camino hacia el siguiente estado
                     parent[str(next_state)] = current_state
-        
-        
-        # Finaliza e imprime el cronometro
-        end = time.time()
-        total_time = end - start
-        
-        print("DFS: Tiempo de ejecución", total_time, "segundos") 
-        print("DFS: Numero de pasos:", total_steps)
-        print("DFS: Numero de nodos expandidos:", nodes_expanded) 
-        print("DFS: Numero de nodos frontera:", frontier_nodes) 
         
         # Si no se encuentra ninguna solución, devuelve None junto con las estadísticas
         return None, expanded_nodes, frontier_nodes

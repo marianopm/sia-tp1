@@ -119,3 +119,21 @@ def get_closest_box_goal_distance(tablero):
                 distance = manhattan_distance(player_pos, (fila, columna))
                 closest_box_goal_distance = min(closest_box_goal_distance, distance)
     return closest_box_goal_distance
+
+def count_boxes_not_in_goals(tablero, tablero_inicial):
+    count = 0
+    for fila in range(len(tablero)):
+        for columna in range(len(tablero[fila])):
+            if tablero[fila][columna] == 'C' and tablero_inicial[fila][columna] != 'O':
+                count += 1
+    return count
+
+def get_closest_box_goal_distance(tablero):
+    player_pos = getPosActualJugador(tablero)
+    closest_box_goal_distance = float('inf')
+    for fila in range(len(tablero)):
+        for columna in range(len(tablero[fila])):
+            if tablero[fila][columna] == 'O':
+                distance = manhattan_distance(player_pos, (fila, columna))
+                closest_box_goal_distance = min(closest_box_goal_distance, distance)
+    return closest_box_goal_distance

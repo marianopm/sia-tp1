@@ -1,4 +1,4 @@
-from .sokobanGame import es_estado_final, generate_next_states, reconstruct_path, get_closest_box_goal_distance
+from .sokobanGame import es_estado_final, generate_next_states, reconstruct_path, get_closest_box_goal_distance, count_boxes_not_in_goals
 
 class A:
     def search(game, heuristic):
@@ -33,7 +33,7 @@ class A:
                 # Calculate g value for the next state
                 next_g = current_g + 1
                 # Calculate h value (Manhattan distance between player and closest box goal)
-                h = get_closest_box_goal_distance(next_state)
+                h = get_closest_box_goal_distance(next_state) if heuristic == 'Manhattan' else count_boxes_not_in_goals(next_state)
                 # Calculate f value
                 f = next_g + h
 
