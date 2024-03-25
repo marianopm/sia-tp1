@@ -5,12 +5,24 @@
 ### Introducción
 
 ### Requisitos
+- Python3
+- pipenv
+- pip3
 
 ### Instalacíon
+En la carpeta SIA-TP1 ejecutar 
+```
+pipenv install
+```
 
 ### Ejecución
-python3 main.py
+```
+pipenv run python main.py
 
+o también
+```
+python3 main.py
+```
 
 ### Grupo 8
 ## Integrantes

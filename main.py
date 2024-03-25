@@ -1,12 +1,12 @@
 import configparser
 from collections import defaultdict
 import time
-from sokobanGame import SokobanGame
-from aStar import A
-from bfs import BFS
-from dfs import DFS
-from greedy import Greedy
-from boards import board_1, board_2, board_3
+from src.sokobanGame import SokobanGame
+from src.aStar import A
+from src.bfs import BFS
+from src.dfs import DFS
+from src.greedy import Greedy
+from src.boards import board_1, board_2, board_3
 
 def main():
     # Lee las configuraciones del archivo config_file

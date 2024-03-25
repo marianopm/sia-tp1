@@ -1,4 +1,4 @@
-from sokobanGame import es_estado_final, generate_next_states, reconstruct_path
+from .sokobanGame import es_estado_final, generate_next_states, reconstruct_path
 
 class BFS:
     def search(game):

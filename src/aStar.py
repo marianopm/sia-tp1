@@ -1,4 +1,4 @@
-from sokobanGame import es_estado_final, generate_next_states, reconstruct_path, get_closest_box_goal_distance
+from .sokobanGame import es_estado_final, generate_next_states, reconstruct_path, get_closest_box_goal_distance
 
 class A:
     def search(game, heuristic):
