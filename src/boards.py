@@ -1,4 +1,4 @@
-# Definición del tablero y constantes
+# Definición del tablero 1
 board_1 = [
     ['#', '#', '#', '#', '#', '#', '#'],
     ['#', ' ', 'J', 'O', 'C', ' ', '#'],
@@ -9,7 +9,7 @@ board_1 = [
     ['#', '#', '#', '#', '#', '#', '#']
 ]
 
-# Definición del tablero y constantes
+# Definición del tablero 2
 board_2 = [
     ['#', '#', '#', '#', '#', '#', '#'],
     ['#', ' ', 'J', 'O', 'C', ' ', '#'],
@@ -20,7 +20,7 @@ board_2 = [
     ['#', '#', '#', '#', '#', '#', '#']
 ]
 
-# Definición del tablero y constantes
+# Definición del tablero 3
 board_3 = [
     ['#', '#', '#', '#', '#', '#', '#'],
     ['#', ' ', 'J', ' ', ' ', ' ', '#'],

@@ -1,6 +1,6 @@
 import time
 from collections import deque
-from .sokobanGame import es_estado_final, generate_next_states, reconstruct_path
+from .sokobanGame import is_final_state, generate_next_states, reconstruct_path
 
 class DFS:
     def search(game):
@@ -23,7 +23,7 @@ class DFS:
             expanded_nodes += 1
 
             # Comprueba si el estado actual es el estado objetivo
-            if es_estado_final(current_state, game.board):
+            if is_final_state(current_state, game.board):
                 # Devuelve el camino hacia el estado objetivo junto con las estadísticas
                 return reconstruct_path(parent, current_state), expanded_nodes, frontier_nodes
 

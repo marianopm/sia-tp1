@@ -13,11 +13,9 @@ def main():
     config_params = read_config('config_file.config')
     
     # Crea el juego Sokoban con los parámetros leídos
-    initial_node = eval(config_params['Sokoban']['initial_state'])
-    goal_state = eval(config_params['Sokoban']['goal_state'])
     heuristic = eval(config_params['Heuristic']['heuristic'])
     board = eval(config_params['Board']['board'])
-    game = SokobanGame(initial_node, goal_state, board)
+    game = SokobanGame(board)
     
      # Ejecuta algoritmo A
     if config_params['Algorithm']['a'] == 'True':
@@ -73,21 +71,21 @@ def print_board(board):
 
 def print_solution(solution, expanded_nodes, frontier_nodes, algorithm, total_time, heuristic = None):
     if solution:
-            print("Exito!")
-            print(f"Algoritmo usado: {algorithm}")
+            print("Success!")
+            print(f"Algorithm used: {algorithm}")
             if heuristic is not None:
-                print(f"Heuristica usada: {heuristic}") 
+                print(f"Heuristic used: {heuristic}") 
             print(f"Total number of steps: {len(solution) - 1}")
             print(f"Expanded nodes: {expanded_nodes}")
             print(f"Frontier nodes: {frontier_nodes}")
             print(f"Time: {total_time}s")
             # print the board state of each step
-            print("Solución encontrada:")
+            print("Found solution:")
             for step, state in enumerate(solution):
-                print(f"Paso {step}:")
+                print(f"Step {step}:")
                 print_board(state)
     else:
-        print("Fracaso")
+        print("Failure")
 
 if __name__ == "__main__":
     main()

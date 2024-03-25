@@ -1,4 +1,4 @@
-from .sokobanGame import es_estado_final, generate_next_states, reconstruct_path, get_closest_box_goal_distance, count_boxes_not_in_goals
+from .sokobanGame import is_final_state, generate_next_states, reconstruct_path, get_closest_box_goal_distance, count_boxes_not_in_goals
 
 class A:
     def search(game, heuristic):
@@ -21,7 +21,7 @@ class A:
             expanded_nodes += 1
 
             # Check if the current state is the goal state
-            if es_estado_final(current_state, game.board):
+            if is_final_state(current_state, game.board):
                 # Return the path to the goal state along with statistics
                 return reconstruct_path(parent, current_state), expanded_nodes, frontier_nodes
             
