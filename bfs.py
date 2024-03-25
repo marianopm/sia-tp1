@@ -1,15 +1,7 @@
-import time
 from sokobanGame import es_estado_final, generate_next_states, reconstruct_path
 
 class BFS:
     def search(game):
-        # Inicia el cronometro
-        start = time.time()
-        
-        # Implementa el algoritmo BFS
-        total_steps = 0
-        nodes_expanded = 0
-        frontier_nodes = 0
         
         # Initialize the frontier with the initial state
         frontier = [game.board]
@@ -28,7 +20,7 @@ class BFS:
             expanded_nodes += 1
 
             # Check if the current state is the goal state
-            if es_estado_final(current_state):
+            if es_estado_final(current_state, game.board):
                 # Return the path to the goal state along with statistics
                 return reconstruct_path(parent, current_state), expanded_nodes, frontier_nodes
             
@@ -45,16 +37,6 @@ class BFS:
                     frontier_nodes += 1
                     # Record the path to the next state
                     parent[str(next_state)] = current_state
-                    
-                          
-        # Finaliza e imprime el cronometro
-        end = time.time()
-        total_time = end - start
-        
-        print("BFS: Tiempo de ejecución", total_time, "segundos") 
-        print("BFS: Numero de pasos:", total_steps)
-        print("BFS: Numero de nodos expandidos:", nodes_expanded) 
-        print("BFS: Numero de nodos frontera:", frontier_nodes) 
         
         # If no solution is found, return None along with statistics
         return None, expanded_nodes, frontier_nodes

@@ -13,18 +13,17 @@ class DFS:
         frontier_nodes = 0
         
         visited = set()
-        solution_path = []
-        solved = False
+
         initial_node = game.initial_node
         goal_node = game.goal_node
         queue = deque([initial_node])
         
         # Inicializa la pila con el estado inicial
-        stack = [initial_node]
+        stack = [game.board]
         # Inicializa un conjunto vacío para realizar un seguimiento de los estados visitados
         visited = set()
         # Inicializa un diccionario para realizar un seguimiento del camino hacia cada estado
-        parent = {str(initial_node): None}
+        parent = {str(game.board): None}
         expanded_nodes = 0  # Contador de nodos expandidos
         frontier_nodes = 1  # Contador de nodos en la frontera (el estado inicial está en la frontera)
 
@@ -36,7 +35,7 @@ class DFS:
             expanded_nodes += 1
 
             # Comprueba si el estado actual es el estado objetivo
-            if es_estado_final(current_state):
+            if es_estado_final(current_state, game.board):
                 # Devuelve el camino hacia el estado objetivo junto con las estadísticas
                 return reconstruct_path(parent, current_state), expanded_nodes, frontier_nodes
 

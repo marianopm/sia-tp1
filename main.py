@@ -1,7 +1,8 @@
 import configparser
 from collections import defaultdict
+import time
 from sokobanGame import SokobanGame
-from a import A
+from aStar import A
 from bfs import BFS
 from dfs import DFS
 from greedy import Greedy
@@ -20,23 +21,49 @@ def main():
     
      # Ejecuta algoritmo A
     if config_params['Algorithm']['a'] == 'True':
-        solution_A, solution, expanded_nodes, frontier_nodes = A.search(game, heuristic)
-        print("A* Solution:", solution_A)
+        # Inicia el cronometro
+        start = time.time()
+        solution, expanded_nodes, frontier_nodes = A.search(game, heuristic)
+        # Finaliza e imprime el cronometro
+        end = time.time()
+        total_time = end - start
+        print("A*: Tiempo de ejecución", total_time, "segundos")
+        print_solution(solution, expanded_nodes, frontier_nodes)
         
      # Ejecuta algoritmo BFS
     if config_params['Algorithm']['bfs'] == 'True':
+        # Inicia el cronometro
+        start = time.time()
         solution, expanded_nodes, frontier_nodes  = BFS.search(game)
+        # Finaliza e imprime el cronometro
+        end = time.time()
+        total_time = end - start
+        print("BFS: Tiempo de ejecución", total_time, "segundos")
+        print_solution(solution, expanded_nodes, frontier_nodes) 
     
     # Ejecuta algoritmo DFS
     if config_params['Algorithm']['dfs'] == 'True':
+        # Inicia el cronometro
+        start = time.time()
         solution, expanded_nodes, frontier_nodes  = DFS.search(game)
+        # Finaliza e imprime el cronometro
+        end = time.time()
+        total_time = end - start
+        print("DFS: Tiempo de ejecución", total_time, "segundos")
+        print_solution(solution, expanded_nodes, frontier_nodes)
 
     # Ejecuta algoritmo Greedy
     if config_params['Algorithm']['greedy'] == 'True':
-        solution_greedy, solution, expanded_nodes, frontier_nodes  = Greedy.search(game, heuristic)
-        print("Greedy Solution:", solution_greedy)
+        # Inicia el cronometro
+        start = time.time()
+        solution, expanded_nodes, frontier_nodes  = Greedy.search(game, heuristic)
+        # Finaliza e imprime el cronometro
+        end = time.time()
+        total_time = end - start
+        print("Greedy: Tiempo de ejecución", total_time, "segundos")
+        print_solution(solution, expanded_nodes, frontier_nodes)
         
-    print_solution(solution, expanded_nodes, frontier_nodes)
+    
 
 def read_config(filename):
     config = configparser.ConfigParser()

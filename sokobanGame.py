@@ -1,5 +1,4 @@
 from collections import deque
-from boards import board_1
 
 MovimientosPosibles = ['UP', 'DOWN', 'LEFT', 'RIGHT']
 
@@ -30,12 +29,12 @@ def reconstruct_path(parent, state):
     return path
 
 # Define el estado final
-def es_estado_final(tablero):
+def es_estado_final(tablero, tablero_inicial):
     for fila in range(len(tablero)):
         for columna in range(len(tablero[fila])):
             if tablero[fila][columna] == 'C':
                 # Si una caja no está sobre un objetivo, el estado no es final
-                if board_1[fila][columna] != 'O':
+                if tablero_inicial[fila][columna] != 'O':
                     return False
     return True
 
@@ -107,3 +106,16 @@ def generate_next_states(state):
         if nuevoTablero not in next_states:
             next_states.append(nuevoTablero)
     return next_states
+
+def manhattan_distance(pos1, pos2):
+    return abs(pos1[0] - pos2[0]) + abs(pos1[1] - pos2[1])
+
+def get_closest_box_goal_distance(tablero):
+    player_pos = getPosActualJugador(tablero)
+    closest_box_goal_distance = float('inf')
+    for fila in range(len(tablero)):
+        for columna in range(len(tablero[fila])):
+            if tablero[fila][columna] == 'O':
+                distance = manhattan_distance(player_pos, (fila, columna))
+                closest_box_goal_distance = min(closest_box_goal_distance, distance)
+    return closest_box_goal_distance
