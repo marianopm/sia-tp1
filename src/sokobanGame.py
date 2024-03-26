@@ -99,6 +99,7 @@ def mainMovimiento(tablero, action):
 
     return nuevoTablero
 
+#Expansion
 def generate_next_states(state):
     next_states = []
     for action in MovimientosPosibles:
@@ -107,6 +108,7 @@ def generate_next_states(state):
             next_states.append(nuevoTablero)
     return next_states
 
+#Heuristicas
 def manhattan_distance(pos1, pos2):
     return abs(pos1[0] - pos2[0]) + abs(pos1[1] - pos2[1])
 

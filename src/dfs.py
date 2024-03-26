@@ -5,7 +5,7 @@ from .sokobanGame import es_estado_final, generate_next_states, reconstruct_path
 class DFS:
     def search(game):
         # Inicia el cronometro
-        start = time.time()
+        #start = time.time()
         
         # Implementa el algoritmo DFS
         total_steps = 0
@@ -55,6 +55,7 @@ class DFS:
         
         
         # Finaliza e imprime el cronometro
+        """
         end = time.time()
         total_time = end - start
         
@@ -62,6 +63,6 @@ class DFS:
         print("DFS: Numero de pasos:", total_steps)
         print("DFS: Numero de nodos expandidos:", nodes_expanded) 
         print("DFS: Numero de nodos frontera:", frontier_nodes) 
-        
+        """
         # Si no se encuentra ninguna solución, devuelve None junto con las estadísticas
         return None, expanded_nodes, frontier_nodes
