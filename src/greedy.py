@@ -30,7 +30,7 @@ class Greedy:
             # Generate all possible next states
             for next_state in generate_next_states(current_state):
                 # Calculate h value (Manhattan distance between player and closest box goal)
-                h = get_closest_box_goal_distance(next_state) if heuristic == 'Manhattan' else count_boxes_not_in_goals(next_state)
+                h = get_closest_box_goal_distance(next_state) if heuristic == 'Manhattan' else count_boxes_not_in_goals(next_state,current_state)
                 
                 # Check if the next state has not been visited
                 if str(next_state) not in visited:
