@@ -1,4 +1,4 @@
-from .sokobanGame import es_estado_final, generate_next_states, reconstruct_path, get_closest_box_goal_distance
+from .sokobanGame import is_final_state, generate_next_states, reconstruct_path, get_closest_box_goal_distance, count_boxes_not_in_goals
 
 class Greedy:
     def search(game, heuristic):
@@ -20,7 +20,7 @@ class Greedy:
             expanded_nodes += 1
 
             # Check if the current state is the goal state
-            if es_estado_final(current_state, game.board):
+            if is_final_state(current_state, game.board):
                 # Return the path to the goal state along with statistics
                 return reconstruct_path(parent, current_state), expanded_nodes, frontier_nodes
             
@@ -30,8 +30,8 @@ class Greedy:
             # Generate all possible next states
             for next_state in generate_next_states(current_state):
                 # Calculate h value (Manhattan distance between player and closest box goal)
-                h = get_closest_box_goal_distance(next_state)
-
+                h = get_closest_box_goal_distance(next_state) if heuristic == 'Manhattan' else count_boxes_not_in_goals(next_state)
+                
                 # Check if the next state has not been visited
                 if str(next_state) not in visited:
                     # Add the next state to the frontier

@@ -1,4 +1,4 @@
-from .sokobanGame import es_estado_final, generate_next_states, reconstruct_path
+from .sokobanGame import is_final_state, generate_next_states, reconstruct_path
 
 class BFS:
     def search(game):
@@ -20,7 +20,7 @@ class BFS:
             expanded_nodes += 1
 
             # Check if the current state is the goal state
-            if es_estado_final(current_state, game.board):
+            if is_final_state(current_state, game.board):
                 # Return the path to the goal state along with statistics
                 return reconstruct_path(parent, current_state), expanded_nodes, frontier_nodes
             
